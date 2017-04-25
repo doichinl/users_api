@@ -1,0 +1,20 @@
+{
+    "name": "uapi",
+    "description": "Users API",
+    "version": "0.0.1",
+    "authors": [
+        {
+            "name": "Doychin Lazarov",
+            "email": "doichinl@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.6",
+        "ext-phalcon": ">=1.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "UAPI\\": "src"
+        }
+    }
+}

@@ -1,0 +1,166 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Users API",
+		"_postman_id": "45ea0a14-c4e6-2251-d3a7-8a53cb491fb8",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Insert",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"Insert test\"] = jsonData.status == 'OK';",
+							"",
+							"postman.setGlobalVariable(\"user_id\", jsonData.user.id);"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "{{url}}/users",
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "forename",
+							"value": "Ivan",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "surname",
+							"value": "Petrov",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "email",
+							"value": "ivan@petrov.com",
+							"type": "text",
+							"enabled": true
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"Get test\"] = jsonData.user.id == postman.getGlobalVariable(\"user_id\");"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "{{url}}/users/{{user_id}}",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "Get user with id 1"
+			},
+			"response": []
+		},
+		{
+			"name": "Update",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"Update test\"] = jsonData.user.surname == 'Ivanov';"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "{{url}}/users/{{user_id}}",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "surname",
+							"value": "Ivanov",
+							"type": "text",
+							"enabled": true
+						}
+					]
+				},
+				"description": "Update user with id 1"
+			},
+			"response": []
+		},
+		{
+			"name": "Listing",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"Insert test\"] = jsonData.status == 'OK';"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "{{url}}/users",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "List all available users"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"Insert test\"] = jsonData.status == 'OK';"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "{{url}}/users/{{user_id}}",
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"description": "Delete user with id 1"
+			},
+			"response": []
+		}
+	]
+}
